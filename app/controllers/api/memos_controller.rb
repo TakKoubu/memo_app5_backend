@@ -1,11 +1,13 @@
 module Api
   class MemosController < ApplicationController
     def index
+      favorite_memo_ids = current_user.favorites.pluck(:memo_id)
       memos = Memo.all.map do |memo|
         memo.favorite_count = memo.favorites.count
+        memo.is_like = memo.id.in?(favorite_memo_ids)
         memo
       end
-      render json: memos.to_json(methods: [:favorite_count])
+      render json: memos.to_json(methods: [:favorite_count, :is_like])
     end
 
     def create
