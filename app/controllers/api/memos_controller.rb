@@ -15,6 +15,8 @@ module Api
     end
 
     def destroy
+      memo = Memo.find(params[:id])
+      memo.destroy!
     end
 
     private
