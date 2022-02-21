@@ -10,6 +10,8 @@ module Api
     end
 
     def destroy
+      memo = current_user.favorite_memos.find(params[:memo_id])
+      current_user.unfavorite(memo)
     end
   end
 end
