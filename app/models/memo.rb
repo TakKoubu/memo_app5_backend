@@ -1,5 +1,5 @@
 class Memo < ApplicationRecord
-  attr_accessor :favorite_count
+  attr_accessor :favorite_count, :is_like
 
   has_many :favorites
   belongs_to :user
