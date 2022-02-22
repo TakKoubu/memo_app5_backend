@@ -24,6 +24,11 @@ module Api
       memo.destroy!
     end
 
+    def show
+      memo = Memo.find(params[:id])
+      render json: memo
+    end
+    
     private
     def memo_params
       params.require(:memo).permit(:content)
