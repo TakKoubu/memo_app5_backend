@@ -4,4 +4,17 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   include DeviseTokenAuth::Concerns::User
+
+  has_many :memos, dependent: :destroy
+  has_many :favorites
+  has_many :favorite_memos, through: :favorites, source: :memo
+
+  def favorite(memo)
+    self.favorites.find_or_create_by(memo_id: memo.id)
+  end
+
+  def unfavorite(memo)
+    favorite = self.favorites.find_by(memo_id: memo.id)
+    favorite.destroy if favorite
+  end
 end
