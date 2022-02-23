@@ -28,10 +28,19 @@ module Api
       memo = Memo.find(params[:id])
       render json: memo
     end
+
+    def search
+      memos = Memo.ransack(search_params).result(distinct: true)
+      render json: memos
+    end
     
     private
     def memo_params
       params.require(:memo).permit(:content)
+    end
+
+    def search_params
+      params.require(:q).permit(:content_cont)
     end
   end
 end
