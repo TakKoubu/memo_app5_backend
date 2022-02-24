@@ -8,7 +8,6 @@ Rails.application.routes.draw do
     resources :users
     resources :memos, only: [:index, :create, :destroy, :show] do
       resource :favorites, only: [:create, :destroy]
-      get :search , on: :collection
     end
   end
 end
