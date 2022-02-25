@@ -31,14 +31,14 @@ ActiveRecord::Schema.define(version: 2022_02_25_072231) do
     t.index ["user_id"], name: "index_memos_on_user_id"
   end
 
-  create_table "tag_relationships", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+  create_table "tag_memos", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.bigint "memo_id", null: false
     t.bigint "tag_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["memo_id", "tag_id"], name: "index_tag_relationships_on_memo_id_and_tag_id", unique: true
-    t.index ["memo_id"], name: "index_tag_relationships_on_memo_id"
-    t.index ["tag_id"], name: "index_tag_relationships_on_tag_id"
+    t.index ["memo_id", "tag_id"], name: "index_tag_memos_on_memo_id_and_tag_id", unique: true
+    t.index ["memo_id"], name: "index_tag_memos_on_memo_id"
+    t.index ["tag_id"], name: "index_tag_memos_on_tag_id"
   end
 
   create_table "tags", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
@@ -83,7 +83,7 @@ ActiveRecord::Schema.define(version: 2022_02_25_072231) do
   add_foreign_key "favorites", "memos"
   add_foreign_key "favorites", "users"
   add_foreign_key "memos", "users"
-  add_foreign_key "tag_relationships", "memos"
-  add_foreign_key "tag_relationships", "tags"
+  add_foreign_key "tag_memos", "memos"
+  add_foreign_key "tag_memos", "tags"
   add_foreign_key "tags", "memos"
 end

@@ -3,8 +3,8 @@ class Memo < ApplicationRecord
   belongs_to :user
 
   has_many :favorites
-  has_many  :tag_relationships, dependent: :destroy
-  has_many  :tags, through: :tag_relationships
+  has_many  :tag_memos, dependent: :destroy
+  has_many  :tags, through: :tag_memos
   
   validates :user_id, presence: true
   validates :content, presence: true
