@@ -14,7 +14,7 @@ module Api
     def create
       memo = current_user.memos.build(memo_params)
       if memo.save
-        render json: memo
+        render json: memo.to_json(include: [:tags])
       else
         render json: memo.errors, status: 422
       end
@@ -32,7 +32,7 @@ module Api
 
     private
     def memo_params
-      params.require(:memo).permit(:content)
+      params.require(:memo).permit(:content, tag_ids: [])
     end
   end
 end
