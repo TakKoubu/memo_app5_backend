@@ -1,12 +1,10 @@
 Rails.application.routes.draw do
-  get 'favorites/create'
-  get 'favorites/destroy'
   devise_for :users
 
   namespace :api do
     mount_devise_token_auth_for 'User', at: 'auth'
     resources :users
-    resources :memos, only: [:index, :create, :destroy, :show] do
+    resources :memos, only: [:index, :create, :destroy, :show, :update] do
       resource :favorites, only: [:create, :destroy]
     end
     resources :tags, only: [:index]
