@@ -8,7 +8,7 @@ module Api
         memo.is_like = memo.id.in?(favorite_memo_ids)
         memo
       end
-      render json: memos.to_json(methods: [:favorite_count, :is_like])
+      render json: memos.to_json(include: [:tags], methods: [:favorite_count, :is_like])
     end
 
     def create
