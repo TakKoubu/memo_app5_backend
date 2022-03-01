@@ -1,8 +1,9 @@
 module Api
   class MemosController < ApplicationController
     def index
+      memos = Memo.ransack(params[:q]).result(distinct: true)
       favorite_memo_ids = current_user.favorites.pluck(:memo_id)
-      memos = Memo.all.map do |memo|
+      memos = memos.map do |memo|
         memo.favorite_count = memo.favorites.count
         memo.is_like = memo.id.in?(favorite_memo_ids)
         memo
@@ -28,7 +29,7 @@ module Api
       memo = Memo.find(params[:id])
       render json: memo
     end
-    
+
     private
     def memo_params
       params.require(:memo).permit(:content)
