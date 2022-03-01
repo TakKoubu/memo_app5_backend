@@ -20,6 +20,11 @@ module Api
       end
     end
 
+    def update
+      memo = Memo.find(params[:id])
+      memo.update(memo_params)
+    end
+
     def destroy
       memo = Memo.find(params[:id])
       memo.destroy!
