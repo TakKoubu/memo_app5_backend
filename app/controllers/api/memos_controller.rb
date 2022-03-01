@@ -36,6 +36,7 @@ module Api
     end
 
     private
+    
     def memo_params
       params.require(:memo).permit(:content, tag_ids: [])
     end
