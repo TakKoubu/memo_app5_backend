@@ -9,5 +9,6 @@ Rails.application.routes.draw do
     resources :memos, only: [:index, :create, :destroy, :show] do
       resource :favorites, only: [:create, :destroy]
     end
+    resources :tags, only: [:index]
   end
 end
