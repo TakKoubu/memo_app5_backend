@@ -8,4 +8,7 @@ class Memo < ApplicationRecord
   
   validates :user_id, presence: true
   validates :content, presence: true
+
+  extend Enumerize
+  enumerize :status, in: [:inprogress, :done], default: :inprogress
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_25_072231) do
+ActiveRecord::Schema.define(version: 2022_03_01_020208) do
 
   create_table "favorites", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.bigint "user_id", null: false
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 2022_02_25_072231) do
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "status", default: "inprogress", null: false
     t.index ["user_id", "created_at"], name: "index_memos_on_user_id_and_created_at"
     t.index ["user_id"], name: "index_memos_on_user_id"
   end
@@ -43,11 +44,8 @@ ActiveRecord::Schema.define(version: 2022_02_25_072231) do
 
   create_table "tags", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name"
-    t.bigint "memo_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["memo_id", "created_at"], name: "index_tags_on_memo_id_and_created_at"
-    t.index ["memo_id"], name: "index_tags_on_memo_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
@@ -85,5 +83,4 @@ ActiveRecord::Schema.define(version: 2022_02_25_072231) do
   add_foreign_key "memos", "users"
   add_foreign_key "tag_memos", "memos"
   add_foreign_key "tag_memos", "tags"
-  add_foreign_key "tags", "memos"
 end
